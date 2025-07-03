@@ -1,0 +1,529 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@100..900&family=Space+Grotesk:wght@300..700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222.2 84% 4.9%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96%;
+    --accent-foreground: 222.2 84% 4.9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --radius: 0.75rem;
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 240 2% 6%;
+    --foreground: 240 4.8% 95.9%;
+    --card: 240 3.7% 15.9%;
+    --card-foreground: 240 4.8% 95.9%;
+    --popover: 240 3.7% 15.9%;
+    --popover-foreground: 240 4.8% 95.9%;
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 240 5.9% 10%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 240 4.8% 95.9%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 240 2% 8%;
+    --accent-foreground: 240 4.8% 95.9%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 240 4.8% 95.9%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 217.2 91.2% 59.8%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 94.1%;
+    --sidebar-primary-foreground: 240 5.9% 10%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-sidebar text-foreground;
+    font-family: "Inter", sans-serif;
+  }
+  
+  /* Landing page specific styles */
+  body.landing-page {
+    width: 100vw;
+    overflow-x: hidden;
+    overflow-y: scroll;
+  }
+  
+  /* Dashboard specific styles */
+  body.dashboard {
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+  }
+  
+  /* Hero background for dashboard wrapper */
+  body.dashboard .group\/sidebar-wrapper {
+    background-image: url('/images/hero.webp');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  
+  /* Make sidebar fully transparent */
+  body.dashboard [data-sidebar="sidebar"] {
+    background: transparent !important;
+    backdrop-filter: none !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+  
+  /* Make sidebar content backgrounds transparent */
+  body.dashboard .sidebar-content,
+  body.dashboard [data-sidebar="content"],
+  body.dashboard [data-sidebar="header"],
+  body.dashboard [data-sidebar="footer"] {
+    background: transparent !important;
+  }
+  
+  /* Make sidebar menu items have subtle backgrounds for readability */
+  body.dashboard [data-sidebar="menu-button"] {
+    background: rgba(255, 255, 255, 0.15) !important;
+    backdrop-filter: blur(12px) saturate(180%) !important;
+    border: none !important;
+    margin-bottom: 4px !important;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+    position: relative !important;
+  }
+  
+  /* Add grain texture to frosted glass buttons */
+  body.dashboard [data-sidebar="menu-button"]::before {
+    content: '' !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    background-image: 
+      radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+      radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+      radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.03) 0.5px, transparent 0.5px) !important;
+    background-size: 8px 8px, 12px 12px, 4px 4px !important;
+    border-radius: inherit !important;
+    pointer-events: none !important;
+    opacity: 0.6 !important;
+  }
+  
+  body.dashboard [data-sidebar="menu-button"]:hover {
+    background: rgba(255, 255, 255, 0.25) !important;
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15) !important;
+  }
+  
+  body.dashboard [data-sidebar="menu-button"][data-active="true"] {
+    background: rgba(255, 255, 255, 0.3) !important;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2) !important;
+  }
+  
+  /* Make Quick Create button text white */
+  body.dashboard [data-sidebar="menu-button"].bg-sidebar-foreground {
+    color: white !important;
+  }
+  
+  /* Make email text white for better readability */
+  body.dashboard .text-muted-foreground {
+    color: rgba(255, 255, 255, 0.9) !important;
+  }
+  
+  /* Ensure all sidebar text is white for readability */
+  body.dashboard [data-sidebar="sidebar"] * {
+    color: white !important;
+  }
+  
+  /* Override specific text colors that might be too dim */
+  body.dashboard .text-sidebar-foreground\/70,
+  body.dashboard .text-sidebar-foreground\/60 {
+    color: rgba(255, 255, 255, 0.8) !important;
+  }
+  
+  /* Remove background from sidebar header link */
+  body.dashboard [data-sidebar="header"] [data-sidebar="menu-button"] {
+    background: transparent !important;
+    backdrop-filter: none !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+  
+  body.dashboard [data-sidebar="header"] [data-sidebar="menu-button"]:hover {
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+  
+  body.dashboard [data-sidebar="header"] [data-sidebar="menu-button"]::before {
+    display: none !important;
+  }
+  
+  /* Fixed logo styles */
+  .fixed-logo {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 1000;
+    width: 3rem;
+    height: 3rem;
+    transition: all 0.3s ease;
+  }
+  
+  @media (min-width: 768px) {
+    .fixed-logo {
+      width: 4rem;
+      height: 4rem;
+      top: 1.5rem;
+      right: 1.5rem;
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .fixed-logo {
+      width: 5rem;
+      height: 5rem;
+      top: 2rem;
+      right: 2rem;
+    }
+  }
+  
+  /* Chat and Dashboard font overrides */
+  body.dashboard,
+  body.dashboard * {
+    font-family: "Inter", sans-serif !important;
+  }
+  
+  /* Special fonts for headings and titles in dashboard/chat */
+  body.dashboard .special-font,
+  body.dashboard .font-anton,
+  body.dashboard h1.hero-heading,
+  body.dashboard .bento-title {
+    font-family: "Anton", sans-serif !important;
+  }
+  
+  body.dashboard .font-general {
+    font-family: "Inter", sans-serif !important;
+  }
+}
+
+@layer utilities {
+  .scrollbar-hide {
+    /* IE and Edge */
+    -ms-overflow-style: none;
+
+    /* Firefox */
+    scrollbar-width: none;
+
+    /* Safari and Chrome */
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  /* Landing Page Styles */
+  .special-font {
+    font-family: "Anton", sans-serif;
+  }
+
+  .special-font b {
+    font-family: "Anton", sans-serif;
+    font-weight: 400;
+  }
+
+  .hero-heading {
+    @apply uppercase font-anton text-5xl sm:right-10 sm:text-7xl md:text-9xl lg:text-[12rem];
+  }
+
+  .bento-title {
+    @apply uppercase md:text-6xl text-4xl font-anton font-normal;
+  }
+
+  .nav-hover-btn {
+    @apply relative ms-10 font-general text-xs uppercase text-blue-50 after:absolute after:-bottom-0.5 after:left-0 after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 after:bg-neutral-800 after:transition-transform after:duration-300 after:ease-nav-hover hover:after:origin-bottom-left hover:after:scale-x-100 dark:after:bg-white cursor-pointer;
+  }
+
+  .floating-nav {
+    @apply bg-black/20 backdrop-blur-md rounded-lg border border-white/10;
+  }
+
+  .border-hsla {
+    @apply border border-white/20;
+  }
+
+  .absolute-center {
+    @apply absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%];
+  }
+
+  .flex-center {
+    @apply flex justify-center items-center;
+  }
+
+  .mask-clip-path {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+
+  .about-subtext {
+    @apply absolute bottom-[-80dvh] left-1/2 w-full max-w-96 -translate-x-1/2 text-center font-general text-lg md:max-w-[34rem] px-4 sm:px-0;
+  }
+
+  .about-image {
+    @apply absolute left-1/2 top-0 z-20 h-[60vh] w-80 origin-center -translate-x-1/2 overflow-hidden rounded-3xl sm:w-96 md:w-[30vw];
+  }
+
+  .animated-title {
+    @apply flex flex-col gap-1 text-4xl uppercase leading-[.8] text-white sm:text-7xl sm:px-32 md:text-[6rem];
+  }
+
+  .animated-word {
+    @apply font-anton opacity-0;
+    transform: translate3d(10px, 51px, -60px) rotateY(60deg) rotateX(-40deg);
+    transform-origin: 50% 50% -150px !important;
+    will-change: opacity, transform;
+  }
+
+  @media (max-width: 640px) {
+    .about-subtext {
+      @apply bottom-[-60dvh] max-w-80 text-base;
+    }
+    
+    .about-image {
+      @apply h-[50vh] w-72;
+    }
+    
+    .animated-title {
+      @apply text-3xl gap-0;
+    }
+  }
+
+  .bento-tilt_1 {
+    @apply relative border-hsla col-span-2 overflow-hidden rounded-md transition-transform duration-300 ease-out;
+  }
+
+  .bento-tilt_2 {
+    @apply relative col-span-1 row-span-1 overflow-hidden rounded-md transition-transform duration-300 ease-out;
+  }
+
+  .story-img-container {
+    @apply relative md:h-dvh h-[60vh] w-full;
+    filter: url("#flt_tag");
+  }
+
+  .story-img-mask {
+    @apply absolute left-0 top-0 size-full overflow-hidden md:left-[20%] md:top-[-10%] md:size-4/5;
+    clip-path: polygon(4% 0, 83% 21%, 100% 73%, 0% 100%);
+  }
+
+  .story-img-content {
+    @apply absolute w-full md:h-dvh h-[60vh] opacity-100 left-0 top-0 md:left-0 md:top-10 lg:left-[-300px] lg:top-[-100px];
+    transform: translate3d(0, 0, 0) rotateX(0) rotateY(0) rotateZ(0) scale(1);
+  }
+
+  @media (max-width: 768px) {
+    .story-img-container {
+      @apply h-[50vh];
+    }
+    
+    .story-img-mask {
+      @apply left-0 top-0 size-full;
+    }
+    
+    .story-img-content {
+      @apply left-0 top-0 h-[50vh];
+    }
+  }
+
+  .gallery-img-container {
+    @apply size-64 overflow-hidden bg-violet-300;
+  }
+
+  .gallery-img {
+    @apply size-full bg-cover;
+  }
+
+  .gallery-img-4 {
+    @apply sm:size-80 md:h-96 md:w-[25rem] rounded-lg;
+  }
+
+  .sword-man-clip-path {
+    clip-path: polygon(16% 0, 89% 15%, 75% 100%, 0 97%);
+  }
+
+  .contact-clip-path-1 {
+    clip-path: polygon(25% 0%, 74% 0, 69% 64%, 34% 73%);
+  }
+
+  .contact-clip-path-2 {
+    clip-path: polygon(29% 15%, 85% 30%, 50% 100%, 10% 64%);
+  }
+}
+
+/* Landing Page Animations */
+.indicator-line {
+  @apply h-1 w-px rounded-full bg-white transition-all duration-200 ease-in-out;
+}
+
+.indicator-line.active {
+  animation: indicator-line 0.5s ease infinite;
+  animation-delay: calc(var(--animation-order) * 0.1s);
+}
+
+@keyframes indicator-line {
+  0% {
+    height: 4px;
+    transform: translateY(-0px);
+  }
+  50% {
+    height: 16px;
+    transform: translateY(-4px);
+  }
+  100% {
+    height: 4px;
+    transform: translateY(-0px);
+  }
+}
+
+/* Loading Spinner */
+.three-body {
+  --uib-size: 35px;
+  --uib-speed: 0.8s;
+  --uib-color: #5d3fd3;
+  position: relative;
+  display: inline-block;
+  height: var(--uib-size);
+  width: var(--uib-size);
+  animation: spin78236 calc(var(--uib-speed) * 2.5) infinite linear;
+}
+
+.three-body__dot {
+  position: absolute;
+  height: 100%;
+  width: 30%;
+}
+
+.three-body__dot:after {
+  content: "";
+  position: absolute;
+  height: 0%;
+  width: 100%;
+  padding-bottom: 100%;
+  background-color: var(--uib-color);
+  border-radius: 50%;
+}
+
+.three-body__dot:nth-child(1) {
+  bottom: 5%;
+  left: 0;
+  transform: rotate(60deg);
+  transform-origin: 50% 85%;
+}
+
+.three-body__dot:nth-child(1)::after {
+  bottom: 0;
+  left: 0;
+  animation: wobble1 var(--uib-speed) infinite ease-in-out;
+  animation-delay: calc(var(--uib-speed) * -0.3);
+}
+
+.three-body__dot:nth-child(2) {
+  bottom: 5%;
+  right: 0;
+  transform: rotate(-60deg);
+  transform-origin: 50% 85%;
+}
+
+.three-body__dot:nth-child(2)::after {
+  bottom: 0;
+  left: 0;
+  animation: wobble1 var(--uib-speed) infinite calc(var(--uib-speed) * -0.15)
+    ease-in-out;
+}
+
+.three-body__dot:nth-child(3) {
+  bottom: -5%;
+  left: 0;
+  transform: translateX(116.666%);
+}
+
+.three-body__dot:nth-child(3)::after {
+  top: 0;
+  left: 0;
+  animation: wobble2 var(--uib-speed) infinite ease-in-out;
+}
+
+@keyframes spin78236 {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes wobble1 {
+  0%,
+  100% {
+    transform: translateY(0%) scale(1);
+    opacity: 1;
+  }
+
+  50% {
+    transform: translateY(-66%) scale(0.65);
+    opacity: 0.8;
+  }
+}
+
+@keyframes wobble2 {
+  0%,
+  100% {
+    transform: translateY(0%) scale(1);
+    opacity: 1;
+  }
+
+  50% {
+    transform: translateY(66%) scale(0.65);
+    opacity: 0.8;
+  }
+}
